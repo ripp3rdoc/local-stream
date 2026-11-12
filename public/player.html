@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#05070c">
+  <title>Local Stream</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='1' fill='%2305070c' stroke='%2337edee'/%3E%3Cpolygon points='12 9 23 16 12 23' fill='white'/%3E%3C/svg%3E">
+  <script>(function () {
+    var d = document.documentElement;
+    d.dataset.theme = 'samurai';
+    d.dataset.mode = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  })();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@400;600;700&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/samurai.css">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+</head>
+<body class="player-page">
+  <header class="topbar">
+    <a class="icon-btn" id="backLink" href="/" aria-label="Back to collection">
+      <svg class="icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="crumbs">
+      <a class="crumbs-cat" id="crumbCat" href="/">Library</a>
+      <div class="crumbs-title" id="crumbTitle">Loading…</div>
+    </div>
+    <div class="topbar-actions"><button class="icon-btn" id="modeBtn"></button></div>
+  </header>
+
+  <div class="player-layout">
+    <main class="player-main">
+      <div class="video-shell">
+        <video id="videoPlayer" controls playsinline preload="metadata"></video>
+        <div class="loading-overlay" id="loadingOverlay">
+          <div class="spinner"></div>
+          <p id="loadingText">Loading video…</p>
+        </div>
+        <div class="upnext" id="upNext" hidden>
+          <div class="upnext-label" data-jp="次のエピソード">Up next <span id="upNextCount"></span></div>
+          <div class="upnext-title" id="upNextTitle"></div>
+          <div class="upnext-actions">
+            <button class="btn btn-primary" id="upNextPlay">Play now</button>
+            <button class="btn" id="upNextCancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-head">
+        <div>
+          <h1 class="video-title" id="videoTitle"></h1>
+          <div class="video-meta" id="videoMeta"></div>
+        </div>
+        <div class="controls">
+          <button class="ctrl switch" id="autoNextBtn" role="switch" aria-checked="true" title="Play the next video automatically when this one ends">
+            <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+            <span>Auto-next</span>
+          </button>
+          <div class="menu-wrap">
+            <button class="ctrl" id="speedBtn" aria-haspopup="menu" aria-expanded="false" title="Playback speed (&lt; / &gt;)">1×</button>
+            <div class="menu" id="speedMenu" role="menu" aria-label="Playback speed" hidden></div>
+          </div>
+          <div class="menu-wrap" id="ccWrap" hidden>
+            <button class="ctrl" id="ccBtn" aria-haspopup="menu" aria-expanded="false" title="Subtitles">
+              <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M10 10.5a2 2 0 1 0 0 3M17 10.5a2 2 0 1 0 0 3" stroke-linecap="round"/></svg>
+              <span class="ctrl-label">Subtitles</span>
+            </button>
+            <div class="menu" id="ccMenu" aria-label="Subtitles" hidden></div>
+          </div>
+          <button class="ctrl" id="castBtn" title="Cast to TV" hidden>
+            <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><line x1="2" y1="20" x2="2.01" y2="20"/></svg>
+            <span class="ctrl-label">Cast</span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="episode-nav" id="episodeNav" aria-label="Previous and next video" hidden>
+        <button class="episode-btn prev" id="prevBtn" disabled>
+          <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="19 20 9 12 19 4 19 20" fill="currentColor"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+          <span class="episode-text"><span class="episode-label">Previous</span><span class="episode-title" id="prevTitle"></span></span>
+        </button>
+        <button class="episode-btn next" id="nextBtn" disabled>
+          <span class="episode-text"><span class="episode-label">Next</span><span class="episode-title" id="nextTitle"></span></span>
+          <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 4 15 12 5 20 5 4" fill="currentColor"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+        </button>
+      </nav>
+
+      <p class="player-hint">
+        Shortcuts: <kbd>Shift</kbd>+<kbd>N</kbd> next · <kbd>Shift</kbd>+<kbd>P</kbd> previous ·
+        <kbd>&lt;</kbd> <kbd>&gt;</kbd> speed · <kbd>Space</kbd> play/pause · <kbd>←</kbd> <kbd>→</kbd> seek 10s · <kbd>F</kbd> fullscreen
+      </p>
+    </main>
+
+    <aside class="playlist" id="playlist" aria-label="Playlist" hidden>
+      <div class="playlist-head">
+        <a class="playlist-title" id="playlistTitle" href="/"></a>
+        <div id="playlistMeter"></div>
+      </div>
+      <div class="playlist-body" id="playlistBody"></div>
+    </aside>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <!-- player.js before the Cast SDK so it defines window.__onGCastApiAvailable
+       before the SDK loads and invokes it. -->
+  <script src="/js/player.js"></script>
+  <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+</body>
+</html>

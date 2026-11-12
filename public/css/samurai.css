@@ -1,0 +1,138 @@
+/* Cyberpunk samurai skin. Layout and interaction rules live in style.css. */
+:root[data-theme='samurai'] {
+  color-scheme: dark;
+  --bg: #05070c;
+  --surface: #0b111b;
+  --surface-2: #101c28;
+  --surface-3: #172c3a;
+  --hover: #203847;
+  --border: #203540;
+  --border-strong: #387080;
+  --text: #e4f3f6;
+  --text-2: #a5bcc7;
+  --text-3: #829da9;
+  --text-strong: #ffffff;
+  --accent: #37edee;
+  --accent-strong: #75ffff;
+  --accent-2: #ff3eaa;
+  --accent-soft: #37edee18;
+  --success: #72f5ae;
+  --danger: #ff729e;
+  --radius-lg: 2px;
+  --radius: 2px;
+  --radius-sm: 1px;
+  --pill: 2px;
+  --font: 'Share Tech Mono', 'Noto Serif JP', monospace;
+  --topbar-bg: #05070cf2;
+  --scrim: #05070cf5;
+  --scrim-weak: #05070c99;
+  --track: #a5bcc726;
+  --cover-bg: linear-gradient(135deg, #15313c, #170d21);
+  --raised: #0b111bf5;
+  --modal-scrim: #000b;
+  --ring: 0 0 0 3px #37edee88;
+  --shadow: 0 16px 44px #0008;
+}
+
+/* Explicit light preference remains available; the default is the void skin. */
+:root[data-theme='samurai'][data-mode='light'] {
+  color-scheme: light;
+  --bg: #eaf0f2; --surface: #f8fbfc; --surface-2: #e0eaee;
+  --surface-3: #ccdde3; --hover: #d2e3e9;
+  --border: #b2c9d1; --border-strong: #668e9d;
+  --text: #102531; --text-2: #365767; --text-3: #4c6877;
+  --text-strong: #06141c; --accent: #00757e; --accent-strong: #00565d;
+  --accent-2: #b80d68; --accent-soft: #00757e14;
+  --success: #157344; --danger: #b72052;
+  --topbar-bg: #eaf0f2f2; --scrim: #eaf0f2f5; --scrim-weak: #eaf0f2b3;
+  --track: #36576733; --raised: #f8fbfcfa; --modal-scrim: #10253180;
+  --cover-bg: linear-gradient(135deg, #c3e3e9, #e8cee0);
+  --ring: 0 0 0 3px #00757e66; --shadow: 0 16px 44px #10253120;
+}
+
+body {
+  background: radial-gradient(ellipse at 90% 0%, #ff3eaa09, transparent 45%),
+    linear-gradient(#37edee04 1px, transparent 1px),
+    linear-gradient(90deg, #37edee04 1px, transparent 1px), var(--bg);
+  background-size: auto, 64px 64px, 64px 64px, auto;
+  background-attachment: fixed;
+}
+h1, h2, .brand-name > span:first-child, .collection-name, .section-name {
+  font-family: 'Orbitron', 'Noto Serif JP', sans-serif;
+}
+.topbar { border-bottom-color: var(--border-strong); }
+.brand-text { display: flex; flex-direction: column; gap: 3px; }
+.brand-name > span:first-child { font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; }
+.brand-jp { font-family: 'Noto Serif JP', serif; font-size: .58rem; letter-spacing: .2em; color: var(--text-3); }
+.brand-mark, .login-brand .brand-mark {
+  flex-shrink: 0; width: 36px; height: 38px; border: 2px solid var(--accent-2);
+  border-radius: 2px; background: transparent; color: var(--accent-2);
+  font-family: 'Noto Serif JP', serif; font-size: 27px; font-weight: 700;
+  line-height: 1; transform: rotate(-5deg); box-shadow: inset 0 0 0 2px var(--bg), inset 0 0 0 3px var(--accent-2);
+}
+.login-brand .brand-mark { width: 64px; height: 68px; font-size: 48px; margin-bottom: 10px; }
+.search input { border-radius: 1px; }
+.btn, .ctrl, .tab, .seg, .field-label, .field > span, .episode-label, .upnext-label {
+  letter-spacing: .07em;
+}
+.btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 700; }
+.btn-primary:hover:not(:disabled) { background: var(--accent-strong); color: var(--bg); box-shadow: 0 0 24px #37edee25; }
+.icon-btn:hover, .ctrl:hover { color: var(--accent); }
+.feature, .hero, .login-card, .modal-card, .playlist {
+  border: 1px solid var(--border-strong); position: relative;
+}
+/* L-shaped targeting brackets sit inside the frame without clipping content. */
+.feature::after, .hero::after, .login-card::after, .modal-card::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background:
+    linear-gradient(var(--accent), var(--accent)) top left / 25px 2px,
+    linear-gradient(var(--accent), var(--accent)) top left / 2px 25px,
+    linear-gradient(var(--accent-2), var(--accent-2)) bottom right / 25px 2px,
+    linear-gradient(var(--accent-2), var(--accent-2)) bottom right / 2px 25px;
+  background-repeat: no-repeat;
+}
+.feature { padding: clamp(22px, 4vw, 48px); }
+.feature-greet { color: var(--accent); text-transform: uppercase; letter-spacing: .13em; font-size: .78rem; flex-wrap: wrap; }
+[data-jp]::after { content: attr(data-jp); font-family: 'Noto Serif JP', serif; font-size: .7rem; font-weight: 400; color: var(--text-3); margin-left: 12px; letter-spacing: .08em; }
+.feature-title, .hero-title { line-height: 1.3; letter-spacing: .015em; }
+.feature-title, .login-brand h1, .brand-name > span:first-child {
+  text-shadow: 1px 0 #ff3eaa90, -1px 0 #37edee90;
+  animation: signal-glitch 9s step-end infinite;
+}
+@keyframes signal-glitch {
+  0%, 94%, 98%, 100% { text-shadow: 1px 0 #ff3eaa90, -1px 0 #37edee90; }
+  95% { text-shadow: 3px 1px var(--accent-2), -3px -1px var(--accent); }
+  97% { text-shadow: -2px 0 var(--accent-2), 2px 1px var(--accent); }
+}
+.feature-art { border: 1px solid var(--border-strong); box-shadow: 6px 6px 0 var(--accent-soft); }
+.feature-art .play-hint { background: var(--accent); color: var(--bg); border-radius: 2px; }
+.feature-progress > span { background: var(--accent); box-shadow: 0 0 12px #37edee55; }
+.block-head { border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+.block-title { font-size: .95rem; letter-spacing: .08em; }
+.block-title::before { content: '//'; color: var(--accent-2); margin-right: 10px; font-family: 'Share Tech Mono', monospace; }
+.collection, .card { border-color: var(--border); }
+.collection:hover, .card:hover { border-color: var(--accent); }
+.collection-name { font-size: .95rem; line-height: 1.5; }
+.collection-body { border-top: 1px solid var(--border); padding-top: 14px; }
+.badge, .duration { border-radius: 1px; }
+.video-shell { box-shadow: 0 0 0 1px var(--border-strong), 0 15px 45px #0005; }
+.pl-item.current { background: var(--accent-soft); box-shadow: inset 3px 0 var(--accent); }
+.upnext, .toast { background: var(--raised); color: var(--text); border: 1px solid var(--border-strong); border-left: 3px solid var(--accent); border-radius: 2px; }
+.toast-error { border-left-color: var(--danger); }
+.login-page { background-color: var(--bg); }
+.login-card { width: min(430px, 100%); padding: 42px 32px 32px; box-shadow: var(--shadow); }
+.login-brand h1 { font-size: clamp(1.25rem, 5vw, 1.65rem); text-transform: uppercase; letter-spacing: .08em; }
+.login-brand p { line-height: 1.7; }
+.login-brand::after { content: '武士道 / PRIVATE MEDIA TERMINAL'; color: var(--accent); font-family: 'Share Tech Mono', 'Noto Serif JP', monospace; font-size: .68rem; letter-spacing: .1em; }
+.spinner { border-top-color: var(--accent); border-right-color: var(--accent-2); }
+@media (max-width: 720px) {
+  .topbar { gap: 10px; }
+  .feature { padding: 20px; }
+  .block-title { font-size: .85rem; }
+  .block-title[data-jp]::after { display: none; }
+  .login-card { padding: 32px 22px 24px; }
+  .collection-body { border-top: 0; border-left: 1px solid var(--border); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

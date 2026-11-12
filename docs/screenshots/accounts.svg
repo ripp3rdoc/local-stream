@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" role="img" aria-label="Accounts &amp; media folders screenshot placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05070c"/><stop offset="0.6" stop-color="#0b111b"/><stop offset="1" stop-color="#170d21"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#203540" stroke-width="1" opacity="0.55"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="800" fill="url(#bg)"/>
+  <rect width="1280" height="800" fill="url(#grid)"/>
+  <!-- HUD corner brackets -->
+  <g fill="none" stroke="#37edee" stroke-width="3">
+    <path d="M24 64V24H64"/><path d="M1216 24H1256V64"/>
+    <path d="M24 736V776H64"/><path d="M1216 776H1256V736"/>
+  </g>
+  <line x1="24" y1="792" x2="448" y2="792" stroke="#ff3eaa" stroke-width="3"/>
+  <!-- hanko seal -->
+  <g transform="translate(570 250)">
+    <rect width="140" height="140" rx="10" fill="#ff3eaa" opacity="0.12" stroke="#ff3eaa" stroke-width="4"/>
+    <text x="70" y="70" text-anchor="middle" dominant-baseline="central" font-family="'Noto Serif JP','Yu Mincho',serif" font-weight="700" font-size="50.4" fill="#ff3eaa">管理</text>
+  </g>
+  <text x="640" y="470" text-anchor="middle" font-family="Orbitron,'Share Tech Mono',Consolas,monospace" font-weight="700" font-size="40" letter-spacing="3" fill="#e4f3f6">ACCOUNTS &amp; MEDIA FOLDERS</text>
+  <text x="640" y="516" text-anchor="middle" font-family="'Share Tech Mono',Consolas,monospace" font-size="20" fill="#a5bcc7">Admin / viewer roles, folder browser</text>
+  <text x="640" y="756" text-anchor="middle" font-family="'Share Tech Mono',Consolas,monospace" font-size="15" fill="#37edee" opacity="0.8">[ screenshot placeholder — replace docs/screenshots/accounts.png ]</text>
+</svg>

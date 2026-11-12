@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Local configuration — holds your media paths and bootstrap login.
+# Copy config.example.json to config.json to get started.
+config.json
+
+# Runtime state: accounts, sessions, watch progress, thumbnails,
+# transcode cache and the local CA private key. Never commit this.
+data/
+
+# Logs
+logs/
+*.log
+
+# Your videos (keep the empty folder so the default media dir exists)
+media/*
+!media/.gitkeep
+
+# Generated demo library and its runtime state (npm run demo:media)
+demo/media/
+demo/data/
+
+# Release archives
+*.zip
+
+# Local AI-agent tooling / notes
+.claude/
+CLAUDE.md
+AGENTS.md
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

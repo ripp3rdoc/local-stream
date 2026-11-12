@@ -1,0 +1,32 @@
+{
+  "name": "local-stream",
+  "version": "1.0.0",
+  "description": "Local network video streaming server",
+  "main": "src/server.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "demo:media": "node demo/generate-media.js",
+    "demo": "node demo/server.js",
+    "demo:screenshots": "node demo/capture.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "node-forge": "^1.4.0",
+    "selfsigned": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "video",
+    "streaming",
+    "self-hosted",
+    "lan",
+    "hls",
+    "chromecast",
+    "ffmpeg",
+    "jellyfin-alternative"
+  ]
+}

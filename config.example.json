@@ -1,0 +1,18 @@
+{
+  "port": 3000,
+  "castHttpPort": 3001,
+  "https": {
+    "enabled": true
+  },
+  "mediaDirs": [
+    { "path": "C:\\Videos\\Movies", "category": "Movies" },
+    { "path": "D:\\Courses", "category": "Courses" }
+  ],
+  "allowedHosts": [],
+  "thumbnailWidth": 480,
+  "transcodePreset": "veryfast",
+  "auth": {
+    "username": "admin",
+    "password": "change-me-to-a-long-passphrase"
+  }
+}
